@@ -1,157 +1,25 @@
-#arrow{
-	 height:50px;
-	 width:50px;
-	 background-size: contain;
-	 margin-top:200px;
-	 transform:scale(1, 1);
-	 opacity:0.6;
-	 transition-duration: 2s;
+#body{
+	background: url("images/HD wallpaper_ star, space, atmosphere, light, astrology, sky, fantasy, celestial body _ Wallpaper Flare.png");
+	background-repeat: no-repeat;
+	background-size: cover;
 }
-#arrow1{
-	 height:50px;
-	 width:50px;
-	 background-size: contain;
-     margin-top:200px;
-	 transform:scale(-1, 1);
-	 opacity:0.6;
-	 transition-duration: 2s;
-}
-#arrow1:hover{
-  transform:scale(-1, 1);
-  opacity:1;	
-}
-#arrow:hover{
-  opacity:1;	
-}
-#gg{
-display:flex;
-flex-direction:row;
-}
-#navinews{
-	height:40%;
-	width:40%;
-	background:url(s111.png) no-repeat center top;
-	z-index:-1;
-	position:absolute;
-	margin-left:30%;
-	background-size: contain;
-	margin-top:10%;
-}
-#yellowline{
-position:absolute;
-width:10%;
-height:100%;
-background-color:yellow;
-margin-left:45%;
-z-index:-2;
-}
-
-#matchesdiv{
-position:absolute;
-height:400px;
-width:400px;
-margin-left:5%;
-margin-top:10%;
-display:flex;
-flex-direction:row;
-transform: scale(1.1);	
-overflow:hidden;
-}
-
-#matchcontainer{
-height:400px;
-width:300px;
-}
-
-body{
-background-color:black;
-padding:0px;
-margin:0px;
-}
-#informationdiv{
-height:400px;
-width:400px;
-margin-left:65%;
-display:flex;
-flex-direction:row;
-margin-top:10%;
-position:absolute;
-transform: scale(1.1);	
-overflow:hidden;
-}
-#informationcontainer{
-height:400px;
-width:300px;
-}
-
-#textMatch{
-	font-weight: 900;
-	margin-top: 100px;
-	margin-left:100px;
-	
-}
-#text1Match{
-	font-weight: 900;
-	margin-top: 100px;
-	margin-left:100px;
-	color:#fffb00;
-}
-
-#text1Information{
-	color:#fc9803;
-	font-weight: 900;
-	margin-left:130px;
-	margin-bottom:30px;
-}
-
-#textInformation{
-	font-weight: 900;
-	color:ffff00;
-}
-
-
-#informationimage{
-	z-index:-1;
-	position:absolute;
-	display: block;
-	width: 100%;
-	height: 100%;
-	object-fit: scale-down;
-	transition: all .3s ease-in-out;
-	
-}
-	#matchesimage{
-	z-index:-1;
-	position:absolute;
-	display: block;
-	width: 100%;
-	height: 100%;
-	object-fit: scale-down;
-	transition: all .1s ease-in-out;
-	
-	}
-	#matchesdiv:hover #matchesimage{
-	transform: scale(1.1);
-	transition-duration: 2s;
-	}
-	#informationdiv:hover #informationimage{
-	transform: scale(1.1);
-	transition-duration: 2s;
-	}
 	#chat{
 		opacity:1;
-	background-color: #ffbb5c;
+	background: url("images/Wa11papers.ru_textures_2560x1600_121.jpg");
 	width:200px;
 	height:500px;
 	position:absolute;
-	margin-top:38%;
+	margin-top:10%;
 	margin-left:45%;
 		border-radius: 0 10px;
+		background-size:cover;
+		background:no-repeat;
 	}
 #chatmsg{
 	width: 200px;
 	height: 50px;
 	border: 1px solid;
+
 
 }
 .msgcontainer{
@@ -171,11 +39,12 @@ color: #e60067;
     font-family: "MV Boli";
 }
 .msg{
-	color: maroon;
+	color: #ff0000;
     font-family: "MV Boli";
 }
 .time{
-	color: #ff0000;
+	color: maroon;
+
     font-family: "MV Boli";
 }
 
@@ -225,12 +94,12 @@ button:hover{
 }
 #up{
 	position: absolute;
-	margin-left: 108px;
+	margin-left: 155px;
 	margin-top: -45px;
 }
    #down{
 	   position: absolute;
-	   margin-left: 108px;
+	   margin-left: 155px;
 	   margin-top: -15px;
    }
 .msgBtn{
@@ -243,6 +112,34 @@ button:hover{
 	position: absolute;
 	margin-left: 10px;
 }
+.rightmsgcontainer{
+	display: flex;
+	flex-direction:row;
+	justify-content: space-between;
+	margin:30px;
+	position: relative;
+	opacity:1;
+}
+.leftmsgcontainer{
+	display: flex;
+	flex-direction:row;
+	justify-content: space-between;
+	margin:30px;
+	position: relative;
+	opacity:1;
+}
 
-
-
+.lineright{
+	background-color: darkgreen;
+	position: absolute;
+	height: 2px;
+	width: 100%;
+	margin-top: 22px;
+}
+.lineleft{
+	background-color: darkred;
+	position: absolute;
+	height: 2px;
+	width: 100%;
+	margin-top: 22px;
+}

@@ -2,6 +2,8 @@ var array;
 var msgbase;
 var oldmsg;
 
+setInterval(get, 5000);//1c = 1000 мс
+
 function chat() {
     var input = document.getElementById('textinput');
     var name = document.getElementById('nameinput');
@@ -17,25 +19,65 @@ function chat() {
     };
     xhttp.send(body);
 }
+let isUpdateMsg = true;
 
 function get() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "getmsg.php", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            array = JSON.parse(this.responseText);
-            msgbase = array.length;
-            remove();
-            for (let i = array.length - 5; i < array.length; i++) {
-                if (array[i] != null)
-                    createmsg(array[i].name, array[i].msg, array[i].time);
 
+    if (isUpdateMsg) {
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "getmsg.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                array = JSON.parse(this.responseText);
+               //if (msgbase != array.length) {
+                    msgbase = array.length;
+                    remove();
+                    for (let i = array.length - 5; i < array.length; i++) {
+                        if (array[i] != null)
+                            createmsg(array[i].name, array[i].msg, array[i].time);
+
+                    }
+                    backroundimage();
+               // }
             }
-        }
-    };
-    xhttp.send();
+        };
+        xhttp.send();
+    }
 }
+
+function msgClick(event, msgContainer) {
+
+    if (event.target.tagName == 'BUTTON') {
+        if (event.target.innerText == "del"){
+            deletemsg(msgContainer);
+        isUpdateMsg=true;}
+        if (event.target.innerText == "up")
+            // update(msgContainer);
+            backspace(msgContainer);
+
+        return;
+    }
+
+    if (msgContainer.childNodes.length > 4)
+        return;
+
+
+    isUpdateMsg=false;
+    var dlt = document.createElement('button');
+    var updt = document.createElement('button');
+    msgContainer.append(dlt);
+    msgContainer.append(updt);
+    dlt.className = 'msgBtn';
+    updt.className = 'msgBtn';
+    dlt.innerText = "del";
+    updt.innerText = "up";
+
+
+
+}
+
 
 function createmsg(name, msg, time) {
     //создаем элементы
@@ -46,8 +88,13 @@ function createmsg(name, msg, time) {
     var timediv = document.createElement("div");
     var linediv = document.createElement("div");
     //присваиваем стиль
-    linediv.className = "line"
-    container.className = "msgcontainer";
+    if (name == document.getElementById("nameinput").value ){
+        container.className = "rightmsgcontainer";
+        linediv.className = "lineright";
+    }else{
+        container.className = "leftmsgcontainer"
+        linediv.className = "lineleft";
+    }
     namediv.className = "name";
     msgdiv.className = "msg";
     timediv.className = "time";
@@ -119,6 +166,7 @@ function update(event, inputcontainer) {
         if (name.value == '') {
             return;
         }
+        isUpdateMsg=true;
         var body = 'message=' + oldmsg + '&name=' + inputcontainer.parentElement.parentElement.firstChild.innerText + "&newmsg=" + inputcontainer.value + "&newname=" + name.value;
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "update.php", true);
@@ -133,34 +181,7 @@ function update(event, inputcontainer) {
 
 }
 
-function msgClick(event, msgContainer) {
 
-    if (event.target.tagName == 'BUTTON') {
-        if (event.target.innerText == "del")
-            deletemsg(msgContainer);
-        if (event.target.innerText == "up")
-            // update(msgContainer);
-            backspace(msgContainer);
-        return;
-    }
-    if (msgContainer.childNodes.length > 4) {
-        return;
-    }
-//msgContainer.style.width = msgContainer.style.width-50;
-    var dlt = document.createElement('button');
-    var updt = document.createElement('button');
-    msgContainer.append(dlt);
-    msgContainer.append(updt);
-    dlt.className = 'msgBtn';
-    updt.className = 'msgBtn';
-    dlt.innerText = "del";
-    updt.innerText = "up";
-
-
-// dlt.setAttribute("onclick","deletemsg(msgContainer)");
-// updt.setAttribute("onclick", "update(msgContainer)");
-
-}
 
 function backspace(container) {
     var msg = container.firstChild.nextSibling.innerText;
@@ -200,4 +221,38 @@ function typing(event, input) {
         }
     };
     xhttp.send(body);
+}
+function backroundimage() {
+   var images = ["wallpapers1.jpg","wallpapers2.jpg","Wa11papers.ru_textures_2560x1600_121.jpg","zastavki.jpg","1579207680110613969.jpg","wall.jpg"];
+   let random = Math.floor(Math.random()*6);
+   let path = "images/"+images[random];
+    let chat =  document.getElementById("chat");
+  chat.style.background= "url("+ path +")";
+    let colors = ["rgb(59, 237, 9)","rgb(237, 161, 9)","rgb(9, 237, 142)","rgb(237, 9, 218)","rgb(237, 9, 218)","rgb(245, 120, 178)"];
+
+    changeMsgContainerColor(chat.firstElementChild.firstElementChild, colors[random]);
+    changeInputColor(chat.firstElementChild.nextElementSibling.firstElementChild, colors[random]);
+}
+function changeMsgContainerColor(msgContainer, color) {
+    if (msgContainer==null)
+        return;
+    let name = msgContainer.firstElementChild;
+    let msg =   msgContainer.firstElementChild.nextElementSibling;
+    let time =  msgContainer.firstElementChild.nextElementSibling.nextElementSibling;
+    name.style.color = color;
+    msg.style.color = color;
+    time.style.color = color;
+    changeMsgContainerColor(msgContainer.nextElementSibling, color);
+}
+function changeInputColor(nameinput,color) {
+let sss = document.getElementById("sss");
+let textinput = sss.firstElementChild.nextElementSibling;
+let button = sss.firstElementChild.nextElementSibling.nextElementSibling;
+textinput.style.backgroundColor = color;
+nameinput.style.backgroundColor = color;
+button.style.backgroundColor = color;
+}
+function mymsg() {
+
+
 }
