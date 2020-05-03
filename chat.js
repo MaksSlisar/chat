@@ -1,7 +1,7 @@
 var array;
 var msgbase;
 var oldmsg;
-
+//
 setInterval(get, 5000);//1c = 1000 мс
 
 function chat() {
